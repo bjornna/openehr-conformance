@@ -1,0 +1,11 @@
+== What is it? 
+A very simple typescript example showing how duration is calculated into seconds. 
+
+== How to run? 
+
+[source]
+----
+npm update
+
+ts-node index.ts
+----
