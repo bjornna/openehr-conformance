@@ -1,0 +1,66 @@
+= How to order openEHR datatypes?
+
+== Background 
+openEHR has several datastructures defined. For most of the the comparator is well defined, but there are some problematic areas. In this note we define how DIPS has implemented ordering. 
+
+Accuracy is a feature with most datatypes in openEHR. The idea is to be able to express that there is some uncertainity on the precision of data. This is very common in medicine. This is very common in medicine. This also introduces problems for ordering data. Currently we don't use the accuracy while ordering data. 
+
+== Datatypes 
+
+|==== 
+|DataType | IsComparable | .NET/Type | Attribute 
+4+^h|BASIC 
+|DV_BOOLEAN | true | _bool_ | `/value` 
+|DV_IDENTIFIER | true | _string_ |`/id` 
+|DV_STATE | true | _DV_CODED_TEXT_ | `/value`
+
+4+^h|TEXT 
+|DV_TEXT | true | _string_ |  `/value`
+|DV_CODED_TEXT | true | _CODE_PHRASE_ 
+| `/defining_code`
+|TERM_MAPPING | false | | 
+|CODE_PHRASE | true | _string_ | `concat(/terminology_id/value, code_string)`
+footnote:[To make ordering of DV_CODED_TEXT convenient we made this _function_ to order code phrases]
+
+4+^h|QUANTITY 
+|DV_ORDERED | false | | 
+|DV_INTERVAL<T> |false | | 
+|REFERENCE_RANGE<T> | false | | 
+|DV_ORDINAL| true | `int`| `/value`
+|DV_SCALE | true | _real_ | `/value`
+|DV_QUANTIFIED | false | | 
+|DV_AMOUNT | false | | 
+|DV_QUANTITY | true | _real_  
+| `/magnitude` footnote:[This is problematic since the unit may vary. We've taken an pragmatic approach to only compare the magnitude]
+|DV_COUNT | true | _int_ | `/magnitude`
+|DV_PROPORTION | true | _real_ | `divide(numerator, denominator)`
+footnote:[Since any DV_PROPORTION is possible to express as a number we choose to order on the number numerator/denominator ]
+|PROPORTION_KIND | false | | 
+|DV_ABSOLUTE_QUANTITY | false | | 
+
+
+4+^h|DATE_TIME 
+|DV_TEMPORAL | false | | 
+|DV_DATE | true | _date_ | `/value`
+|DV_TIME |true | _int_ | `/value`
+|DV_DATETIME | true |_date_ | `/value`
+|DV_DURATION | true | _int_ | `/magnitude`
+footnote:[Any ISO8601 duration can be computed into seconds. We use the seconds to order the duration. This means that i.e. `P1Y != P52W != P365D`]
+
+4+^h|URI 
+|DV_EHR_URI | true | _string_ | `/value`
+|DV_URI | true | _string_ | `/value`
+
+4+^h|TIME_SPECIFICATION 
+|DV_GENERAL_TIME_SPECIFICATION | false | | 
+|DV_PERIODIC_TIME_SPECIFICATION| false | | 
+
+
+4+^h|ENCAPSULATED 
+|DV_ENCAPSULATED | false | | 
+|DV_MULTIMEDIA | false | | 
+|DV_PARSABLE | false |  | 
+
+
+
+|==== 
