@@ -44,6 +44,7 @@ footnote:[Since any DV_PROPORTION is possible to express as a number we choose t
 |DV_DATE | true | _date_ | `/value`
 |DV_TIME |true | _int_ | `/value`
 |DV_DATETIME | true |_date_ | `/value`
+footnote:[All date and datetimes are ordered based on their UTC representation. This takes care of timezones when ordering. Since a given datetime 15.dec 10:00 the _lowest_ timezone will be lowest in their UTC representation. ]
 |DV_DURATION | true | _int_ | `/magnitude`
 footnote:[Any ISO8601 duration can be computed into seconds. We use the seconds to order the duration. This means that i.e. `P1Y != P52W != P365D`]
 
