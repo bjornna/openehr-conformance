@@ -5,52 +5,63 @@ openEHR has several datastructures defined. For most of the the comparator is we
 
 Accuracy is a feature with most datatypes in openEHR. The idea is to be able to express that there is some uncertainity on the precision of data. This is very common in medicine. This is very common in medicine. This also introduces problems for ordering data. Currently we don't use the accuracy while ordering data. 
 
+WARNING:: Updated 17.february 2020. After a long discussion we found that the best way to handle this is to not make a generic handling of DataTypes. The client has to make an AQL path down to the primitive value which may be sorted by the underlying platform (operative system, programming language). There is one exception to this: For date and datetime we will make a convenient way to ORDER BY a path to the datatype. The reason for this is that ordering on time is so normal for health applications. 
+
+Some type issues: 
+
+* For `string` values we use the .NET https://docs.microsoft.com/en-us/dotnet/api/system.stringcomparer.ordinalignorecase?view=netframework-4.8[StringComparer.OrdinalIgnoreCase Property]
+* If a path locates different datatypes/primitives the engine will give a non-deterministic result on the ORDER BY or COMPARE function 
+* Magnitude is introduced as a function attribute on  _DV_PROPORTION_ og _DV_DURATION_ to make comparsion and order by possible for those datatypes. 
+
+
+
+
 == Datatypes 
 
 |==== 
 |DataType | IsComparable | .NET/Type | Attribute 
 4+^h|BASIC 
-|DV_BOOLEAN | true | _bool_ | `/value` 
-|DV_IDENTIFIER | true | _string_ |`/id` 
-|DV_STATE | true | _DV_CODED_TEXT_ | `/value`
+|DV_BOOLEAN | false | _bool_ | `/value` 
+|DV_IDENTIFIER | false | _string_ |`/id` 
+|DV_STATE | false | _DV_CODED_TEXT_ | `/value`
 
 4+^h|TEXT 
-|DV_TEXT | true | _string_ |  `/value`
-|DV_CODED_TEXT | true | _CODE_PHRASE_ 
+|DV_TEXT | false | _string_ |  `/value`
+|DV_CODED_TEXT | false | _CODE_PHRASE_ 
 | `/defining_code`
 |TERM_MAPPING | false | | 
-|CODE_PHRASE | true | _string_ | `concat(/terminology_id/value, code_string)`
+|CODE_PHRASE | false | _string_ | `concat(/terminology_id/value, ':', code_string)`
 footnote:[To make ordering of DV_CODED_TEXT convenient we made this _function_ to order code phrases]
 
 4+^h|QUANTITY 
 |DV_ORDERED | false | | 
 |DV_INTERVAL<T> |false | | 
 |REFERENCE_RANGE<T> | false | | 
-|DV_ORDINAL| true | `int`| `/value`
-|DV_SCALE | true | _real_ | `/value`
+|DV_ORDINAL| false | _int_| `/value`
+|DV_SCALE | false | _real_ | `/value`
 |DV_QUANTIFIED | false | | 
 |DV_AMOUNT | false | | 
-|DV_QUANTITY | true | _real_  
+|DV_QUANTITY | false | _real_  
 | `/magnitude` footnote:[This is problematic since the unit may vary. We've taken an pragmatic approach to only compare the magnitude]
-|DV_COUNT | true | _int_ | `/magnitude`
-|DV_PROPORTION | true | _real_ | `divide(numerator, denominator)`
-footnote:[Since any DV_PROPORTION is possible to express as a number we choose to order on the number numerator/denominator ]
+|DV_COUNT | false | _int_ | `/magnitude`
+|DV_PROPORTION | false  | _real_ | `/magnitude()`
+footnote:[Since any DV_PROPORTION is possible to express as a number we choose to order on the number numerator/denominator. As defined in the specification: Effective magnitude represented by ratio.  ]
 |PROPORTION_KIND | false | | 
 |DV_ABSOLUTE_QUANTITY | false | | 
 
 
 4+^h|DATE_TIME 
 |DV_TEMPORAL | false | | 
-|DV_DATE | true | _date_ | `/value`
-|DV_TIME |true | _int_ | `/value`
-|DV_DATETIME | true |_date_ | `/value`
+|DV_DATE | true | _datetime_ | `/value`
+|DV_TIME |true | _timespan_ | `/value` footnote:[A relatice concept with hours, minutes, second, etc. .']
+|DV_DATETIME | true |_datetime_ | `/value`
 footnote:[All date and datetimes are ordered based on their UTC representation. This takes care of timezones when ordering. Since a given datetime 15.dec 10:00 the _lowest_ timezone will be lowest in their UTC representation. ]
-|DV_DURATION | true | _int_ | `/magnitude`
-footnote:[Any ISO8601 duration can be computed into seconds. We use the seconds to order the duration. This means that i.e. `P1Y != P52W != P365D`]
+|DV_DURATION | false | _int_ | `/magnitude()`
+footnote:[Any ISO8601 duration can be computed into seconds. We use the seconds to order the duration. This means that i.e. `P1Y != P12M != P52W` NOTE: We've added a function magnitude which is the computed duration in seconds of the /value string ]
 
 4+^h|URI 
-|DV_EHR_URI | true | _string_ | `/value`
-|DV_URI | true | _string_ | `/value`
+|DV_EHR_URI | false | _string_ | `/value`
+|DV_URI | false | _string_ | `/value`
 
 4+^h|TIME_SPECIFICATION 
 |DV_GENERAL_TIME_SPECIFICATION | false | | 
