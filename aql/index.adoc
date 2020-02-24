@@ -1,7 +1,7 @@
 = AQL Issues 
 
 == Case #1
-The following AQLs will be intepreted as logical equals for the AQL engine. The first `AQL 1.0` is a _short hand_ query for the full AQL defined as `AQL 1.3`. 
+The following AQLs will be intepreted as logical equals for the AQL engine. The queries`AQL 1.0-1.2` are  _short hand_ queries for the full AQL defined as `AQL 1.3`. 
 
 
 
@@ -36,6 +36,12 @@ select o from EHR e
 ----
 
 == Case #2
+In this example we will query for data in two different OBSERVATION archetypes. As you see from the example the OBSERVATION must be present in the same COMPOSITION and in the same VERSION. This detailed information is not expressed directly in the first AQL's. 
+
+Make sure you read and understand the consequences of this example when creating queries like the one given in `AQL 2.0`.
+
+
+And again: The following AQLs will be intepreted as logical equals for the AQL engine. And again we can say that `AQL 2.0 - 2.2` are _short hand_ versions of the executed `AQL 2.3`. 
 
 .AQL 2.0
 [source,sql]
@@ -83,14 +89,24 @@ select o, o2 from EHR e
 ----
 
 == Case #3
+This example is more or less the same as in Case #2. But here we want to query OBSERVATION data which may be present in different COMPOSITIONs. There is one requirement thought; the EHR should have both OBSERVATIONs present. To make this possible we create the plain and simple `AQL 3.0`.
+
+
+
 .AQL 3.0
 [source,sql]
 ----
 select o, o2 from EHR e 
     CONTAINS ( 
-            (COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1])
-            and 
-            (COMPOSITION c2 CONTAINS OBSERVATION o2[openEHR-EHR-OBSERVATION.body_weight.v1])
+                (
+                    COMPOSITION c 
+                        CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1]
+                )
+                and 
+                (
+                    COMPOSITION c2 
+                        CONTAINS OBSERVATION o2[openEHR-EHR-OBSERVATION.body_weight.v1]
+                )
         )
 ----
 
@@ -100,18 +116,31 @@ select o, o2 from EHR e
 select o, o2 from EHR e 
     CONTAINS
         ( 
-            (VERSIONED_COMPOSITION vo CONTAINS VERSION v[latest_version] CONTAINS COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1])
+            (
+                VERSIONED_COMPOSITION vo 
+                    CONTAINS VERSION v[latest_version] 
+                        CONTAINS COMPOSITION c 
+                            CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1]
+            )
             and 
-            (VERSIONED_COMPOSITION vo CONTAINS VERSION v[latest_version] CONTAINS COMPOSITION c2 CONTAINS OBSERVATION o2[openEHR-EHR-OBSERVATION.body_weight.v1])
+            (
+                VERSIONED_COMPOSITION vo 
+                    CONTAINS VERSION v[latest_version] 
+                        CONTAINS COMPOSITION c2 
+                            CONTAINS OBSERVATION o2[openEHR-EHR-OBSERVATION.body_weight.v1]
+            )
         )
 ----
+
+WARNING::  Is `AQL 3.2` equivalent to the above queries (`AQL 3.0` and `AQL 3.1`)? +
+We don't think so. 
 
 .AQL 3.2
 [source, sql]
 ----
 select o, o2 from EHR e 
     CONTAINS VERSIONED_COMPOSITION vo 
-        CONTAINS VERSION v[all_versions] 
+        CONTAINS VERSION v[latest_version] 
             CONTAINS
                 ( 
                     (COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1])
@@ -121,10 +150,11 @@ select o, o2 from EHR e
 ----
 
 == Case #4
+Combining the rules above into some real-life pseudo-queries may give something like the following. Here we want the two different OBSERVATIONs but only if the given EHR has diabetes. The pseudo-query is to get some ICD10 or SNOMED-CT based problem in an EVALUATION.problem_diagnosis. 
 
 [source,sql]
 ----
-select o from EHR e CONTAINS (OBSERVATION o[lab] and OBSERVATION o2[exam])
+select o, o2 from EHR e CONTAINS (OBSERVATION o[lab] and OBSERVATION o2[exam])
 where 
     exists(select o from COMPOSITION c where diabetes = true)
 ----
