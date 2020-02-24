@@ -1,6 +1,9 @@
 = AQL Issues 
 
 == Case #1
+The following AQLs will be intepreted as logical equals for the AQL engine. The first `AQL 1.0` is a _short hand_ query for the full AQL defined as `AQL 1.3`. 
+
+
 
 .AQL 1.0
 [source, sql]
