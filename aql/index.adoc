@@ -26,7 +26,7 @@ select o from EHR e
 [source, sql]
 ----
 select o from EHR e 
-    CONTAINS VERSIONED_OBJECT vo 
+    CONTAINS VERSIONED_COMPOSITION vo 
         CONTAINS VERSION v[latest_version] 
             CONTAINS COMPOSITION c 
                 CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1]
@@ -70,7 +70,7 @@ select o, o2 from EHR e
 [source,sql]
 ----
 select o, o2 from EHR e 
-    CONTAINS VERSIONED_OBJECT vo CONTAINS VERSION v[latest_version] 
+    CONTAINS VERSIONED_COMPOSITION vo CONTAINS VERSION v[latest_version] 
         CONTAINS COMPOSITION c 
             CONTAINS (
                 OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1] 
@@ -97,9 +97,9 @@ select o, o2 from EHR e
 select o, o2 from EHR e 
     CONTAINS
         ( 
-            (VERSIONED_OBJECT vo CONTAINS VERSION v[latest_version] CONTAINS COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1])
+            (VERSIONED_COMPOSITION vo CONTAINS VERSION v[latest_version] CONTAINS COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1])
             and 
-            (VERSIONED_OBJECT vo CONTAINS VERSION v[latest_version] CONTAINS COMPOSITION c2 CONTAINS OBSERVATION o2[openEHR-EHR-OBSERVATION.body_weight.v1])
+            (VERSIONED_COMPOSITION vo CONTAINS VERSION v[latest_version] CONTAINS COMPOSITION c2 CONTAINS OBSERVATION o2[openEHR-EHR-OBSERVATION.body_weight.v1])
         )
 ----
 
@@ -107,7 +107,7 @@ select o, o2 from EHR e
 [source, sql]
 ----
 select o, o2 from EHR e 
-    CONTAINS VERSIONED_OBJECT vo 
+    CONTAINS VERSIONED_COMPOSITION vo 
         CONTAINS VERSION v[all_versions] 
             CONTAINS
                 ( 
