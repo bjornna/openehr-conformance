@@ -11,18 +11,25 @@ select o from OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1]
 .AQL 1.1
 [source, sql]
 ----
-select o from COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1]
+select o from COMPOSITION c 
+    CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1]
 ----
 .AQL 1.2
 [source, sql]
 ----
-select o from EHR e CONTAINS COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1]
+select o from EHR e 
+    CONTAINS COMPOSITION c 
+        CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1]
 ----
 
 .AQL 1.3
 [source, sql]
 ----
-select o from EHR e CONTAINS VERSIONED_OBJECT vo CONTAINS VERSION v[latest_version] CONTAINS COMPOSITION c CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1]
+select o from EHR e 
+    CONTAINS VERSIONED_OBJECT vo 
+        CONTAINS VERSION v[latest_version] 
+            CONTAINS COMPOSITION c 
+                CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.lab_test-result.v1]
 ----
 
 == Case #2
@@ -111,6 +118,7 @@ select o, o2 from EHR e
 ----
 
 == Case #4
+
 [source,sql]
 ----
 select o from EHR e CONTAINS (OBSERVATION o[lab] and OBSERVATION o2[exam])
