@@ -1,0 +1,286 @@
+{
+  "_type": "COMPOSITION",
+  "archetype_node_id": "openEHR-EHR-COMPOSITION.encounter.v1",
+  "name": {
+    "value": "C1"
+  },
+  "uid": {
+    "_type": "OBJECT_VERSION_ID",
+    "value": "a44e9f72-9395-4468-89a5-88ece9c469f5::ehr_craft::1"
+  },
+  "archetype_details": {
+    "archetype_id": {
+      "value": "openEHR-EHR-COMPOSITION.encounter.v1"
+    },
+    "template_id": {
+      "value": "AQL_Teaser2"
+    },
+    "rm_version": "1.0.4"
+  },
+  "language": {
+    "terminology_id": {
+      "value": "openehr"
+    },
+    "code_string": "nb"
+  },
+  "territory": {
+    "terminology_id": {
+      "value": "openehr"
+    },
+    "code_string": "NO"
+  },
+  "category": {
+    "defining_code": {
+      "terminology_id": {
+        "value": "openehr"
+      },
+      "code_string": "433"
+    }
+  },
+  "composer": {
+    "_type": "PARTY_IDENTIFIED",
+    "name": "default"
+  },
+  "context": {
+    "start_time": {
+      "value": "2020-03-06T08:19:26.1603809+01:00"
+    },
+    "setting": {
+      "value": "secondary medical",
+      "defining_code": {
+        "terminology_id": {
+          "value": "openehr"
+        },
+        "code_string": "232"
+      }
+    },
+    "other_context": {
+      "_type": "ITEM_TREE",
+      "archetype_node_id": "at0001",
+      "name": {
+        "value": "Tree"
+      }
+    }
+  },
+  "content": [
+    {
+      "_type": "SECTION",
+      "archetype_node_id": "openEHR-EHR-SECTION.adhoc.v1",
+      "name": {
+        "value": "S1"
+      },
+      "archetype_details": {
+        "archetype_id": {
+          "value": "openEHR-EHR-SECTION.adhoc.v1"
+        },
+        "template_id": {
+          "value": "AQL_Teaser2"
+        },
+        "rm_version": "1.0.4"
+      },
+      "items": [
+        {
+          "_type": "INSTRUCTION",
+          "archetype_node_id": "openEHR-EHR-INSTRUCTION.service_request.v1",
+          "name": {
+            "value": "I1"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-INSTRUCTION.service_request.v1"
+            },
+            "template_id": {
+              "value": "AQL_Teaser2"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "nb"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "narrative": {
+            "value": "I1"
+          },
+          "activities": [
+            {
+              "_type": "ACTIVITY",
+              "archetype_node_id": "at0001",
+              "name": {
+                "value": "Forespørsel"
+              },
+              "description": {
+                "_type": "ITEM_TREE",
+                "archetype_node_id": "at0009",
+                "name": {
+                  "value": "Tree"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "archetype_node_id": "at0121",
+                    "name": {
+                      "value": "Tjenestenavn"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "I1"
+                    }
+                  }
+                ]
+              },
+              "timing": {
+                "formalism": "dummy"
+              },
+              "action_archetype_id": "*"
+            }
+          ]
+        },
+        {
+          "_type": "INSTRUCTION",
+          "archetype_node_id": "openEHR-EHR-INSTRUCTION.service_request.v1",
+          "name": {
+            "value": "I2"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-INSTRUCTION.service_request.v1"
+            },
+            "template_id": {
+              "value": "AQL_Teaser2"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "nb"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "narrative": {
+            "value": "I2"
+          },
+          "activities": [
+            {
+              "_type": "ACTIVITY",
+              "archetype_node_id": "at0001",
+              "name": {
+                "value": "Forespørsel"
+              },
+              "description": {
+                "_type": "ITEM_TREE",
+                "archetype_node_id": "at0009",
+                "name": {
+                  "value": "Tree"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "archetype_node_id": "at0121",
+                    "name": {
+                      "value": "Tjenestenavn"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "I2"
+                    }
+                  }
+                ]
+              },
+              "timing": {
+                "formalism": "dummy"
+              },
+              "action_archetype_id": "*"
+            }
+          ]
+        },
+        {
+          "_type": "INSTRUCTION",
+          "archetype_node_id": "openEHR-EHR-INSTRUCTION.service_request.v1",
+          "name": {
+            "value": "I3"
+          },
+          "archetype_details": {
+            "archetype_id": {
+              "value": "openEHR-EHR-INSTRUCTION.service_request.v1"
+            },
+            "template_id": {
+              "value": "AQL_Teaser2"
+            },
+            "rm_version": "1.0.4"
+          },
+          "language": {
+            "terminology_id": {
+              "value": "ISO_639-1"
+            },
+            "code_string": "nb"
+          },
+          "encoding": {
+            "terminology_id": {
+              "value": "IANA"
+            },
+            "code_string": "UTF-8"
+          },
+          "subject": {
+            "_type": "PARTY_SELF"
+          },
+          "narrative": {
+            "value": "I3"
+          },
+          "activities": [
+            {
+              "_type": "ACTIVITY",
+              "archetype_node_id": "at0001",
+              "name": {
+                "value": "Forespørsel"
+              },
+              "description": {
+                "_type": "ITEM_TREE",
+                "archetype_node_id": "at0009",
+                "name": {
+                  "value": "Tree"
+                },
+                "items": [
+                  {
+                    "_type": "ELEMENT",
+                    "archetype_node_id": "at0121",
+                    "name": {
+                      "value": "Tjenestenavn"
+                    },
+                    "value": {
+                      "_type": "DV_TEXT",
+                      "value": "I3"
+                    }
+                  }
+                ]
+              },
+              "timing": {
+                "formalism": "dummy"
+              },
+              "action_archetype_id": "*"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

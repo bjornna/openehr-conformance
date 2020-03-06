@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<composition p1:type="COMPOSITION" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" archetype_node_id="openEHR-EHR-COMPOSITION.encounter.v1" xmlns:p1="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openehr.org/v1">
+  <name>
+    <value>C1</value>
+  </name>
+  <uid xsi:type="OBJECT_VERSION_ID">
+    <value>a44e9f72-9395-4468-89a5-88ece9c469f5::ehr_craft::1</value>
+  </uid>
+  <archetype_details>
+    <archetype_id>
+      <value>openEHR-EHR-COMPOSITION.encounter.v1</value>
+    </archetype_id>
+    <template_id>
+      <value>AQL_Teaser2</value>
+    </template_id>
+    <rm_version>1.0.4</rm_version>
+  </archetype_details>
+  <language>
+    <terminology_id>
+      <value>openehr</value>
+    </terminology_id>
+    <code_string>nb</code_string>
+  </language>
+  <territory>
+    <terminology_id>
+      <value>openehr</value>
+    </terminology_id>
+    <code_string>NO</code_string>
+  </territory>
+  <category>
+    <value />
+    <defining_code>
+      <terminology_id>
+        <value>openehr</value>
+      </terminology_id>
+      <code_string>433</code_string>
+    </defining_code>
+  </category>
+  <composer xsi:type="PARTY_IDENTIFIED">
+    <name>default</name>
+  </composer>
+  <context>
+    <start_time>
+      <value>2020-03-06T08:19:26.1603809+01:00</value>
+    </start_time>
+    <setting>
+      <value>secondary medical</value>
+      <defining_code>
+        <terminology_id>
+          <value>openehr</value>
+        </terminology_id>
+        <code_string>232</code_string>
+      </defining_code>
+    </setting>
+    <other_context xsi:type="ITEM_TREE" archetype_node_id="at0001">
+      <name>
+        <value>Tree</value>
+      </name>
+    </other_context>
+  </context>
+  <content xsi:type="SECTION" archetype_node_id="openEHR-EHR-SECTION.adhoc.v1">
+    <name>
+      <value>S1</value>
+    </name>
+    <archetype_details>
+      <archetype_id>
+        <value>openEHR-EHR-SECTION.adhoc.v1</value>
+      </archetype_id>
+      <template_id>
+        <value>AQL_Teaser2</value>
+      </template_id>
+      <rm_version>1.0.4</rm_version>
+    </archetype_details>
+    <items xsi:type="INSTRUCTION" archetype_node_id="openEHR-EHR-INSTRUCTION.service_request.v1">
+      <name>
+        <value>I1</value>
+      </name>
+      <archetype_details>
+        <archetype_id>
+          <value>openEHR-EHR-INSTRUCTION.service_request.v1</value>
+        </archetype_id>
+        <template_id>
+          <value>AQL_Teaser2</value>
+        </template_id>
+        <rm_version>1.0.4</rm_version>
+      </archetype_details>
+      <language>
+        <terminology_id>
+          <value>ISO_639-1</value>
+        </terminology_id>
+        <code_string>nb</code_string>
+      </language>
+      <encoding>
+        <terminology_id>
+          <value>IANA</value>
+        </terminology_id>
+        <code_string>UTF-8</code_string>
+      </encoding>
+      <subject xsi:type="PARTY_SELF" />
+      <narrative>
+        <value>I1</value>
+      </narrative>
+      <activities archetype_node_id="at0001">
+        <name>
+          <value>Forespørsel</value>
+        </name>
+        <description xsi:type="ITEM_TREE" archetype_node_id="at0009">
+          <name>
+            <value>Tree</value>
+          </name>
+          <items xsi:type="ELEMENT" archetype_node_id="at0121">
+            <name>
+              <value>Tjenestenavn</value>
+            </name>
+            <value xsi:type="DV_TEXT">
+              <value>I1</value>
+            </value>
+          </items>
+        </description>
+        <timing>
+          <value />
+          <formalism>dummy</formalism>
+        </timing>
+        <action_archetype_id>*</action_archetype_id>
+      </activities>
+    </items>
+    <items xsi:type="INSTRUCTION" archetype_node_id="openEHR-EHR-INSTRUCTION.service_request.v1">
+      <name>
+        <value>I2</value>
+      </name>
+      <archetype_details>
+        <archetype_id>
+          <value>openEHR-EHR-INSTRUCTION.service_request.v1</value>
+        </archetype_id>
+        <template_id>
+          <value>AQL_Teaser2</value>
+        </template_id>
+        <rm_version>1.0.4</rm_version>
+      </archetype_details>
+      <language>
+        <terminology_id>
+          <value>ISO_639-1</value>
+        </terminology_id>
+        <code_string>nb</code_string>
+      </language>
+      <encoding>
+        <terminology_id>
+          <value>IANA</value>
+        </terminology_id>
+        <code_string>UTF-8</code_string>
+      </encoding>
+      <subject xsi:type="PARTY_SELF" />
+      <narrative>
+        <value>I2</value>
+      </narrative>
+      <activities archetype_node_id="at0001">
+        <name>
+          <value>Forespørsel</value>
+        </name>
+        <description xsi:type="ITEM_TREE" archetype_node_id="at0009">
+          <name>
+            <value>Tree</value>
+          </name>
+          <items xsi:type="ELEMENT" archetype_node_id="at0121">
+            <name>
+              <value>Tjenestenavn</value>
+            </name>
+            <value xsi:type="DV_TEXT">
+              <value>I2</value>
+            </value>
+          </items>
+        </description>
+        <timing>
+          <value />
+          <formalism>dummy</formalism>
+        </timing>
+        <action_archetype_id>*</action_archetype_id>
+      </activities>
+    </items>
+    <items xsi:type="INSTRUCTION" archetype_node_id="openEHR-EHR-INSTRUCTION.service_request.v1">
+      <name>
+        <value>I3</value>
+      </name>
+      <archetype_details>
+        <archetype_id>
+          <value>openEHR-EHR-INSTRUCTION.service_request.v1</value>
+        </archetype_id>
+        <template_id>
+          <value>AQL_Teaser2</value>
+        </template_id>
+        <rm_version>1.0.4</rm_version>
+      </archetype_details>
+      <language>
+        <terminology_id>
+          <value>ISO_639-1</value>
+        </terminology_id>
+        <code_string>nb</code_string>
+      </language>
+      <encoding>
+        <terminology_id>
+          <value>IANA</value>
+        </terminology_id>
+        <code_string>UTF-8</code_string>
+      </encoding>
+      <subject xsi:type="PARTY_SELF" />
+      <narrative>
+        <value>I3</value>
+      </narrative>
+      <activities archetype_node_id="at0001">
+        <name>
+          <value>Forespørsel</value>
+        </name>
+        <description xsi:type="ITEM_TREE" archetype_node_id="at0009">
+          <name>
+            <value>Tree</value>
+          </name>
+          <items xsi:type="ELEMENT" archetype_node_id="at0121">
+            <name>
+              <value>Tjenestenavn</value>
+            </name>
+            <value xsi:type="DV_TEXT">
+              <value>I3</value>
+            </value>
+          </items>
+        </description>
+        <timing>
+          <value />
+          <formalism>dummy</formalism>
+        </timing>
+        <action_archetype_id>*</action_archetype_id>
+      </activities>
+    </items>
+  </content>
+</composition>
