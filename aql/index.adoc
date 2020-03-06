@@ -1,5 +1,8 @@
 = AQL Issues 
 
+== Background 
+The following examples demonstrates some use-cases related to AQL. The purpose is to illustrate how different AQL syntaxes actually ends up being the same effective query when execeuted by the engine. The examples give the reader insight in what the outcome will be by the AQL. 
+
 == Case #1
 The following AQLs will be intepreted as logical equals for the AQL engine. The queries`AQL 1.0-1.2` are  _short hand_ queries for the full AQL defined as `AQL 1.3`. 
 
