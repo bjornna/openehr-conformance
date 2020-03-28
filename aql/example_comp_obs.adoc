@@ -1,0 +1,143 @@
+= SELECT C FROM COMPOSITION C CONTAINS OBSERVATION O
+
+== Background 
+This is part of a serie of examples learning how to interpret openEHR AQL. 
+
+The example is discussed on Discourse https://discourse.openehr.org/t/aql-the-simplest-possible-question/533/9[]
+
+Date: 28.March 2020
+
+== Example data 
+Given an EHR with two compositions (C1 and C2). The first composition (C1) contains one observation (O1). The second (C2) contains two observations (O2, O3). 
+
+[source]
+----
+
+|======|
+|  C1  |
+|------|
+|  O1  |
+|======|
+
+|======|
+|  C2  |
+|------|
+|  O2  |
+|------|
+|  O3  |
+|======|
+
+----
+
+
+== Example 1
+
+The following AQL is exeuted: 
+
+[source]
+----
+select c from COMPOSITION c contains OBSERVATION o
+----
+
+What is the expected result? 
+
+.Alternative 1.0
+[source]
+----
+|----|
+| c  |
+|----|
+| C1 |
+| C2 |
+|----|
+----
+
+.Alternative 1.1
+[source]
+----
+|----|
+| c  |
+|----|
+| C1 |
+| C2 |
+| C2 |
+|----|
+----
+
+== Example 2 
+Then what if we change the AQL a bit into 
+
+[source]
+----
+select c,o from COMPOSITION c contains OBSERVATION o
+----
+.Alternative 2.0
+[source]
+----
+|---------|
+| c  | o  |
+|---------|
+| C1 | O1 |
+| C2 | O2 |
+|---------|
+----
+.Alternative 2.1
+[source]
+----
+|---------|
+| c  | o  |
+|---------|
+| C1 | O1 |
+| C2 | O2 |
+| C2 | O3 |
+|---------|
+----
+
+
+== What we learned 
+Example 1 and 2 above illustrates how `contains` has to semantics. In the first example it is used as a _filter_ on data. In example 2 it is used as an _inner join_ on data. The interpretation depends on how the client defines the select. 
+
+One way to implement the datastructure above might be to with a simple database model. Two tables where needed. _COMPOSITION_ and _OBSERVATION_. 
+
+.Simple databasemodel for the example 
+[source]
+-----
+
+Table COMPOSITION
+|----|
+| ID |
+|----|
+| C1 |
+| C2 |
+|----|
+
+
+Table OBSERVATION 
+|---------|
+| ID | CID|
+|---------|
+| O1 | C1 |
+| O2 | C2 |
+| O3 | C2 |
+|---------| 
+
+CID = Reference key to the COMPOSITION
+-----
+
+
+.SQL equivalent to example 1 
+[source, sql]
+----
+select c.ID from COMPOSITION c inner join OBSERVATION o on o.CID = c.ID
+----
+
+
+.SQL equivalent to example 2 
+[source, sql]
+----
+select c.ID, o.ID from COMPOSITION c inner join OBSERVATION o on o.CID = c.ID
+----
+
+
+
+
