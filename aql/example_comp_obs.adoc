@@ -95,7 +95,9 @@ select c,o from COMPOSITION c contains OBSERVATION o
 
 
 == What we learned 
-Example 1 and 2 above illustrates how `contains` has to semantics. In the first example it is used as a _filter_ on data. In example 2 it is used as an _inner join_ on data. The interpretation depends on how the client defines the select. 
+Example 1 and 2 above illustrates how `contains` has two different semantic meanings. In the first example it is used as a _filter_ on data. In example 2 it is used as an _inner join_ on data. The interpretation depends on how the client defines the select. 
+
+== What about SQL? 
 
 One way to implement the datastructure above might be to with a simple database model. Two tables where needed. _COMPOSITION_ and _OBSERVATION_. 
 
