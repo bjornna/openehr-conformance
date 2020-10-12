@@ -88,6 +88,18 @@ The openEHR resultset for this AQL is provided as `resultset_aql_1.(json|xml)`. 
 
 CAUTION: This output is correct. It seems like it is 9 measurements. But in fact we have only 3. 
 
+CAUTION: UPDATE as of october 2020. +
+DIPS openEHR server (EHR Store) has changed it's AQL pipeline. The above AQL will now only give 3 rows. One row for each POINT_EVENT. We've changed the pipeline to identify unique paths which actually gives the right result in this case. 
+
+
+[cols="1,3,3,2,2,2", options="header"]
+|====
+| # | Origin | EventTime | Systolic | Diastolic | Mansjett
+|1 | 20:00  | 20:05 | 100 | 90 | Adult thigh
+|4 | 20:00 | 20:10 | 101|90 |Adult thigh 
+|9 |20:15| 20:20 | 102 | 92 | Large adult 
+|====
+
 ==== Array based resultset 
 This is an update `23.april 2019` where we explore the possibility to return array for paths with multiple results. For the AQL above we see that the first observation has two point_events. For each of the paths in the tree we return an array. The resultset is given in the table below. 
 
