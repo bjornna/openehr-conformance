@@ -62,3 +62,26 @@ This is an update `23.april 2019` where we explore the possibility to return arr
 | # |Origin | EventTime | Eye | Verbal | Motor | Score | Comment 
 |1|08:30 | 08:35 | 2 | 2 | 2 | 6 | ["Comment 1", "Comment 2"]
 |====
+
+
+UPDATE 12.october
+Seems like Better has implemented the above as a `SQUASH` function. 
+
+Based on this the AQL to get the array based resultset will be: 
+
+
+[source]
+----
+SELECT
+    o/data[at0001]/origin/value as Origin,
+    o/data[at0001]/events[at0002]/time/value as EventTime,
+    o/data[at0001]/events[at0002]/data[at0003]/items[at0009]/value/value as Eye,
+    o/data[at0001]/events[at0002]/data[at0003]/items[at0007]/value/value as Verbal,
+    o/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value/value as Motor,
+    o/data[at0001]/events[at0002]/data[at0003]/items[at0026]/value/magnitude as Score,
+    squash(o/data[at0001]/events[at0002]/data[at0003]/items[at0037]/value/value) as Comment
+
+FROM COMPOSITION c 
+CONTAINS OBSERVATION o[openEHR-EHR-OBSERVATION.glasgow_coma_scale.v1]
+WHERE c/uid/value = $cid
+----
